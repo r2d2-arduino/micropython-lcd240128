@@ -113,6 +113,8 @@ class LCD240128( FrameBuffer ):
         
     def init_text_mode( self ):
         ''' Text mode init '''
+        self.reset()
+        
         self.set_command( 0x40, 0, 0 ) # set text home address: low high addr
         self.set_command( 0x41, LCD_COLUMNS, LCD_FIX0 ) # set text area: col 0 (number of columns of text (8 pix wide)
         self.set_command( 0x90 | 0 | 4 | 2 | 1 ) # display mode: +8=Graph, +4=Text, +2=Cursor, +1=Blink
@@ -122,7 +124,7 @@ class LCD240128( FrameBuffer ):
         #self.set_command( 0xD0, 1, LCD_FIX0 ) # reverse on/off
         self.set_command( 0x50, 2, LCD_FIX0 ) # blink speed: 0..7 (2 - default)
         self.set_command( 0x60, 1, LCD_FIX0 ) # cursor auto move on/off
-        self.set_command( 0x70, 3, LCD_FIX0 ) # font select: 2..3
+        self.set_command( 0x70, 2, LCD_FIX0 ) # font select: 2..3
         
         self.clear_space()        
         
