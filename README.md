@@ -23,7 +23,7 @@ Library for LCD 240128 display ( with FrameBuffer )
 |20 |	 A  |	+5v backlight Anode
 |21 |	 K  |	GND backlight Kathode
 
-3 and 19 pins are used to adjust the display contrast through a resistor.
+4 and 19 pins are used to adjust the display contrast through a resistor.
 I use a 1 Mega Ohm variable resistor. Acceptable contrast ~270kOm.
 
 **Code example:**
