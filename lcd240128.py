@@ -1,9 +1,11 @@
 """
-v 0.1.4
+v 0.1.5
 
-LCD24064 is a FrameBuffer based MicroPython driver for the graphical
-LiquidCrystal LCD24064 display
+LCD240128 is a FrameBuffer based MicroPython driver for the graphical
+LiquidCrystal LCD240128 display
 Сonnection: Data bus 8-bit
+Color: 1-bit monochrome
+Controllers: Esp32-family, RP2
 
 Project path: https://github.com/r2d2-arduino/micropython-lcd240128
 MIT Licenze
@@ -94,7 +96,7 @@ class LCD240128( FrameBuffer ):
         #self.set_command( 0xD0, 1, LCD_FIX0 ) # reverse on/off
         
     def init_text_mode( self ):
-        ''' Text mode init '''
+        ''' Text mode initialization '''
         self.reset()
         
         self.set_command( 0x40, 0, 0 ) # set text home address: low high addr
@@ -258,25 +260,7 @@ class LCD240128( FrameBuffer ):
 
     def set_inversion( self, on = 1 ):
         ''' Set display inversion '''
-        self.set_command( 0xD0, int(on), LCD_FIX0 )
-            
-    @micropython.viper
-    def _reverse_bits( self, byte: int ) -> int:
-        ''' Reverse bits 0100 0111 => 1110 0010
-        Args
-        byte (int): Income byte
-        Return (int): Reversed byte
-        '''
-        result = 0
-        if byte & 1: result |= 1 << 7
-        if (byte >> 1) & 1: result |= 1 << 6
-        if (byte >> 2) & 1: result |= 1 << 5
-        if (byte >> 3) & 1: result |= 1 << 4
-        if (byte >> 4) & 1: result |= 1 << 3
-        if (byte >> 5) & 1: result |= 1 << 2
-        if (byte >> 6) & 1: result |= 1 << 1
-        if (byte >> 7) & 1: result |= 1
-        return result               
+        self.set_command( 0xD0, int(on), LCD_FIX0 )             
             
     def set_font(self, font):
         """ Set font for text
@@ -390,14 +374,14 @@ class LCD240128( FrameBuffer ):
             if planes == 1 and depth == 1 and compress == 0: #compress method == uncompressed
                 f.seek(offset)
                 
-                self.send_bmp_to_buffer( f, x, y, width, height, color)
+                self._send_bmp_to_buffer( f, x, y, width, height, color)
             else:
                 print("Unsupported planes, depth, compress:", planes, depth, compress )
                 
         f.close()    
         
     @micropython.viper
-    def send_bmp_to_buffer( self, f, x:int, y:int, width:int, height:int, color:int):
+    def _send_bmp_to_buffer( self, f, x:int, y:int, width:int, height:int, color:int):
         """ Send bmp-file to buffer
         Args
         f (object File) : Image file

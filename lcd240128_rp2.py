@@ -4,6 +4,8 @@ v 0.1.5
 LCD240128 is a FrameBuffer based MicroPython driver for the graphical
 LiquidCrystal LCD240128 display
 Сonnection: Data bus 8-bit
+Color: 1-bit monochrome
+Controllers: RP2
 
 Project path: https://github.com/r2d2-arduino/micropython-lcd240128
 MIT Licenze
@@ -458,14 +460,14 @@ class LCD240128( FrameBuffer ):
             if planes == 1 and depth == 1 and compress == 0: #compress method == uncompressed
                 f.seek(offset)
                 
-                self.send_bmp_to_buffer( f, x, y, width, height, color)
+                self._send_bmp_to_buffer( f, x, y, width, height, color)
             else:
                 print("Unsupported planes, depth, compress:", planes, depth, compress )
                 
         f.close()    
         
     @micropython.viper
-    def send_bmp_to_buffer( self, f, x:int, y:int, width:int, height:int, color:int):
+    def _send_bmp_to_buffer( self, f, x:int, y:int, width:int, height:int, color:int):
         """ Send bmp-file to buffer
         Args
         f (object File) : Image file
