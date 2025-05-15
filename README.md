@@ -51,16 +51,16 @@ lcd.show()
 * **tools/font_to_py.py** - Used to convert ttf font to py-script. First of all, you need to install: `pip install freetype-py`. Then run a command similar to the example: `python font_to_py.py -x LibreBodoni-Bold.ttf 24 LibreBodoni24.py`. More details: https://github.com/peterhinch/micropython-font-to-py
 
 ## Display functions:
-* **clear( self ):** - Clear display.
-* **set_inversion( self, on = 1 ):** - Set display inversion
-* **set_font( self, font ):** - Set font for text
-* **set_text_wrap( self, on = True ):** - Set text wrapping
-* **draw_text( self, text, x, y, color = 1 ):** - Draw text on display
-* **draw_bitmap( self, bitmap, x, y, color ):** - Draw a bitmap on display
-* **load_bmp( self, filename, x = 0, y = 0, color = 1 ):** - Load monochromatic BMP image on FrameBuffer
-* **show( self ):** - Send FrameBuffer to lcd
+* **clear ( ):** - Clear display.
+* **set_inversion ( on = True ):** - Set display inversion
+* **set_font ( font ):** - Set font for text
+* **set_text_wrap ( on = True ):** - Set text wrapping
+* **draw_text ( text, x, y, color = 1 ):** - Draw text on display
+* **draw_bitmap ( bitmap, x, y, color ):** - Draw a bitmap on display
+* **load_bmp ( filename, x = 0, y = 0, color = 1 ):** - Load monochromatic BMP image on FrameBuffer
+* **show ( ):** - Send FrameBuffer to lcd
 * **other FrameBuffer functions** - see more on https://docs.micropython.org/en/latest/library/framebuf.html#module-framebuf
 
 ## Text mode functions (Embedded display symbols):
-* **init_text_mode( self ):** - Text mode initialization. Default is graphic mode.
-* **clear_space( self ):** - Clear display. Fill display by Space symbols.
+* **init_text_mode ( ):** - Text mode initialization. Default is graphic mode.
+* **clear_space ( ):** - Clear display. Fill display by Space symbols.
